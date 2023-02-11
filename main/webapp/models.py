@@ -5,7 +5,7 @@ STATUS = [('On_moderated', 'На модерации'), ('Published', 'Опубл
 
 
 class Adds(models.Model):
-    image = models.ImageField(null=True, blank=True, upload_to='user_pic_products', verbose_name='Картинки')
+    image = models.ImageField(null=True, blank=True, upload_to='uploads/user_adds_image', verbose_name='Картинки')
     title = models.CharField(max_length=50, verbose_name='Заголовок')
     description_adds = models.TextField(max_length=300, null=True, blank=True)
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='adds', verbose_name='Автор объявления')
