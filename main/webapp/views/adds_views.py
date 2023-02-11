@@ -1,9 +1,11 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from webapp.forms import AddsForm, CommentsForm
 from webapp.models import Adds, Comments
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.core.exceptions import PermissionDenied
 
 
 
@@ -16,7 +18,7 @@ class AddsList(ListView):
 
     def get_queryset(self):
         return self.model.objects.filter(status='Published')
-class AddsCreate(CreateView):
+class AddsCreate(LoginRequiredMixin, CreateView):
     template_name = 'adds/adds_create.html'
     model = Adds
     form_class = AddsForm
@@ -28,22 +30,33 @@ class AddsCreate(CreateView):
     def get_success_url(self):
         return reverse('webapp:detail_adds', kwargs={'pk': self.object.pk})
 
-class AddsUpdate(UpdateView):
+class AddsUpdate(PermissionRequiredMixin, UpdateView):
     template_name = 'adds/adds_update.html'
     form_class = AddsForm
     model = Adds
     context_object_name = 'adds'
 
+    def has_permission(self):
+        return self.get_object().author == self.request.user
+
     def form_valid(self, form):
         form.instance.author = self.request.user
+        if self.object.status == 'Rejected':
+            raise PermissionDenied()
+        form.instance.status = 'On_moderated'
         return super().form_valid(form)
+
     def get_success_url(self):
         return reverse('webapp:detail_adds', kwargs={'pk': self.object.pk})
 
-class AddsDelete(DeleteView):
+class AddsDelete(PermissionRequiredMixin, DeleteView):
     template_name = 'adds/adds_delete.html'
     model = Adds
     success_url = reverse_lazy('webapp:index')
+
+    def has_permission(self):
+        return self.get_object().author == self.request.user
+
     def form_valid(self, form):
         success_url = self.get_success_url()
         self.object.status = 'On_deleted'

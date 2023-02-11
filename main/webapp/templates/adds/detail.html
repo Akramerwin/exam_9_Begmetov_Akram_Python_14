@@ -1,16 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block nav %}
-{#    {% if perms.webapp.change_product %}#}
+    {% if adds.status != 'Rejected' %}
 {% if request.user == adds.author %}
                 <a class="nav-link" href="{% url "webapp:update_adds" adds.pk %}">Update!</a>
     {% endif %}
-{#    {% if perms.webapp.delete_product %}#}
+        {% endif %}
 {% if request.user == adds.author %}
                 <a class="nav-link" href="{% url "webapp:delete_adds" adds.pk %}">Delete!</a>
 {% endif %}
-
-{#    {% endif %}#}
 
 {% endblock %}
 {% block content %}
@@ -37,5 +35,9 @@
     {% for comment in comments %}
         {% include 'partial/comments_list.html' %}
     {% endfor %}
-    {% include "comments/create_comment.html" %}
+    {% if request.user.is_authenticated %}
+    {% if request.user != adds.author %}
+        {% include "comments/create_comment.html" %}
+    {% endif %}
+    {% endif %}
 {% endblock %}

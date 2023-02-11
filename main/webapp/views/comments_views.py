@@ -3,11 +3,12 @@ from django.urls import reverse_lazy, reverse
 from webapp.forms import CommentsForm
 from webapp.models import Comments, Adds
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView
-# from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
-class CommentsCreate(CreateView):
+class CommentsCreate(PermissionRequiredMixin, CreateView):
     model = Comments
     form_class = CommentsForm
+
 
     def form_valid(self, form):
         adds = get_object_or_404(Adds, pk=self.kwargs.get('pk'))
@@ -19,8 +20,11 @@ class CommentsCreate(CreateView):
     def get_success_url(self):
         return reverse('webapp:detail_adds', kwargs={'pk': self.object.adds.pk})
 
-class DeleteComments(DeleteView):
+class DeleteComments(PermissionRequiredMixin, DeleteView):
     model = Comments
+
+    def has_permission(self):
+        return self.get_object().author == self.request.user
 
     def get(self, request, *args, **kwargs):
         return self.delete(request, *args, **kwargs)
@@ -29,13 +33,6 @@ class DeleteComments(DeleteView):
         return reverse('webapp:detail_adds', kwargs={'pk': self.object.adds.pk})
 
 
-# class DeleteReviewDeleteView):
-#     template_name = 'co'
-#     model = Comments
-#     permission_required = 'webapp.delete_review'
-#
-#     def get_success_url(self):
-#         return reverse('webapp:product_view', kwargs={'pk': self.object.product.pk})
 
 # class ListNoModeratedReviewView(PermissionRequiredMixin, ListView):
 #     model = Review
