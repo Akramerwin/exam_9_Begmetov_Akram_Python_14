@@ -1,0 +1,10 @@
+<body>
+
+<h1>Написать комментарий</h1>
+
+<form action="{% url 'webapp:create_comments' adds.pk %}" method="POST">
+    {% csrf_token %}
+{% include 'partial/form.html' with button_text="Create" %}
+</form>
+
+</body>

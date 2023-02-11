@@ -1,0 +1,18 @@
+{% load static %}
+<div style="display: inline-block">
+<br/>
+<div class="card ms-5" style="width: 18rem;">
+  <div class="card-body">
+      {% if request.user == comment.author %}
+                <a class="btn btn-primary" href="{% url "webapp:delete_comment" comment.pk %}">Удалить ваш комментарий!</a>
+          <br/>
+          <br/>
+    {% endif %}
+    <h5 class="card-title"><a href="{% url 'accounts:detail' comment.author.pk %}">{{ comment.author.username }}| {{ comment.author.email }} </a></h5>
+    <p class="card-text">Комментарий: {{ comment.description_comment }} </p>
+      <p class="card-text">Дата: {{ comment.created_at }} </p>
+  </div>
+</div>
+<br/>
+</div>
+

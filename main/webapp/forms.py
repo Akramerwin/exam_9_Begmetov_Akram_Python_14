@@ -11,10 +11,10 @@ class AddsForm(forms.ModelForm):
         fields = ['image', 'title', 'description_adds', 'category', 'price']
 
 
-# class ReviewForm(forms.ModelForm):
-#     class Meta:
-#         model = Review
-#         fields = ['description_review', 'rating']
+class CommentsForm(forms.ModelForm):
+    class Meta:
+        model = Comments
+        fields = ['description_comment']
 
 
 # class ModeratorReviewForm(forms.ModelForm):

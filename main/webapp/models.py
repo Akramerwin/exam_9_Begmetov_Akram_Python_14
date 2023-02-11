@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth import get_user_model
-STATUS = [('On_moderated', 'На модерации'), ('Published', 'Опубликовано'), ('On_deleted', 'На удалении')]
+STATUS = [('On_moderated', 'На модерации'), ('Published', 'Опубликовано'), ('On_deleted', 'На удалении'), ('Rejected', 'Отклоненые')]
 
 
 class Adds(models.Model):
@@ -30,7 +30,7 @@ class Category(models.Model):
 class Comments(models.Model):
     description_comment = models.TextField(max_length=2000, verbose_name='Комментарий')
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='comment', verbose_name='Автор комментария')
-    adds = models.ForeignKey('webapp.Adds', on_delete=models.CASCADE, related_name='adds', verbose_name='Объявления')
+    adds = models.ForeignKey('webapp.Adds', on_delete=models.CASCADE, related_name='comments', verbose_name='Объявления')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создание комментария')
 
     class Meta:

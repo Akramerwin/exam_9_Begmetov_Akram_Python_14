@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
-from webapp.forms import AddsForm
+from webapp.forms import AddsForm, CommentsForm
 from webapp.models import Adds, Comments
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
@@ -53,4 +53,15 @@ class AddsDelete(DeleteView):
 class AddsView(DetailView):
     template_name = 'adds/detail.html'
     model = Adds
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        comments = self.object.comments.all()
+
+        # if not self.request.user.has_perm('webapp.view_not_moderated_review'):
+        #     reviews = reviews.filter(is_moderated=True)
+
+        context['form'] = CommentsForm
+        context['comments'] = comments.order_by('-created_at')
+        return context
 

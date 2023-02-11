@@ -34,4 +34,8 @@
   <div class="card-footer bg-transparent border-success"><p><a href="{% url 'webapp:index' %}" style="color: green; text-decoration: none">На главную</a></p>
 </div>
 </div>
+    {% for comment in comments %}
+        {% include 'partial/comments_list.html' %}
+    {% endfor %}
+    {% include "comments/create_comment.html" %}
 {% endblock %}

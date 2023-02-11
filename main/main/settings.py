@@ -121,11 +121,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
-# MEDIA_URL = '/uploads/'
-# LOGIN_REDIRECT_URL = 'webapp:index'
-# LOGOUT_REDIRECT_URL = 'webapp:index'
-#
-# LOGIN_URL = "accounts:login"
+MEDIA_URL = '/uploads/'
+LOGIN_REDIRECT_URL = 'webapp:index'
+LOGOUT_REDIRECT_URL = 'webapp:index'
+
+LOGIN_URL = "accounts:login"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
