@@ -5,7 +5,7 @@ from webapp.models import Comments, Adds
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
-class CommentsCreate(PermissionRequiredMixin, CreateView):
+class CommentsCreate(LoginRequiredMixin, CreateView):
     model = Comments
     form_class = CommentsForm
 
@@ -34,11 +34,3 @@ class DeleteComments(PermissionRequiredMixin, DeleteView):
 
 
 
-# class ListNoModeratedReviewView(PermissionRequiredMixin, ListView):
-#     model = Review
-#     template_name = 'Review_html/not_moder.html'
-#     context_object_name = 'reviews'
-#     permission_required = 'webapp.view_not_moderated_review'
-#
-#     def get_queryset(self):
-#         return super().get_queryset().filter(is_moderated=False)

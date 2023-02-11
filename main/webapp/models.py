@@ -20,6 +20,11 @@ class Adds(models.Model):
     def __str__(self):
         return f'{self.title}, {self.author}'
 
+    class Meta:
+        permissions = [("view_not_moderated_review", "Видеть не модерированые отзывы")]
+
+    class Meta:
+        permissions = [("view_not_moderated_adds", "Видеть не модерированые объявления")]
 
 
 class Category(models.Model):
@@ -33,8 +38,6 @@ class Comments(models.Model):
     adds = models.ForeignKey('webapp.Adds', on_delete=models.CASCADE, related_name='comments', verbose_name='Объявления')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создание комментария')
 
-    class Meta:
-        permissions = [("view_not_moderated_review", "Видеть не модерированые отзывы")]
 
     def __str__(self):
         return f'{self.author.username} - {self.adds.title}'

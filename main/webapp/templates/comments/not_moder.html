@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for add in adds %}
+        {% load static %}
+        <div id="div-{{ add.pk }}">
+        <div style="display: inline-block">
+            <br/>
+            <div class="card ms-5" style="width: 18rem;">
+                {% if add.image %}
+                    <img src="{{ add.image.url }}" class="card-img-top" style="max-width: 300px; max-height: 180px">
+                {% else %}
+                    <img src="{% static "images/No-Image-Placeholder.svg.png" %}"
+                         style="max-width: 300px; max-height: 180px">
+                {% endif %}
+                <div class="card-body">
+                    {% if request.user == add.author %}
+                        <a class="btn btn-primary" href="{% url "webapp:delete_adds" add.pk %}">Удалить ваше
+                            объявление!</a>
+                        <br/>
+                        <br/>
+                    {% endif %}
+                    <h5 class="card-title">Товар: {{ add.title }}</h5>
+                    <p class="card-text">Категория: {{ add.category }} </p>
+                    <p class="card-text">Цена: {{ add.price }} $</p>
+                    <a href="{% url "webapp:detail_adds" add.pk %}" class="btn btn-primary">Просмотр товара</a>
+                    <br/><br/>
+                    <button id="butt_c-{{ add.pk }}" data-id="{{ add.pk }}" onclick="buttonClick(event)"
+                            data-index-link="{% url 'webapp:adds_moder' add.pk %}">Подтвердить
+                    </button>
+                    <button id="butt_c-{{ add.pk }}" data-id="{{ add.pk }}" onclick="buttonClickCancel(event)"
+                            data-index-link="{% url 'webapp:cancel_moder' add.pk %}">Отклонить
+                    </button>
+                </div>
+            </div>
+            <br/>
+        </div>
+</div>
+    {% endfor %}
+    <script src="{% static "js/moder.js" %}"></script>
+{% endblock %}

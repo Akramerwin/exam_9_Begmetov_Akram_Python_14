@@ -17,7 +17,3 @@ class CommentsForm(forms.ModelForm):
         fields = ['description_comment']
 
 
-# class ModeratorReviewForm(forms.ModelForm):
-#     class Meta:
-#         model = Review
-#         fields = ['description_review', 'rating', 'is_moderated']

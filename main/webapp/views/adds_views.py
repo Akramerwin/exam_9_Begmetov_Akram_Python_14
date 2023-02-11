@@ -1,6 +1,8 @@
-from django.http import HttpResponseRedirect, Http404
-from django.shortcuts import render
+from django.http import HttpResponseRedirect, Http404, JsonResponse
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy, reverse
+from django.views import View
+
 from webapp.forms import AddsForm, CommentsForm
 from webapp.models import Adds, Comments
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -13,7 +15,7 @@ class AddsList(ListView):
     template_name = 'adds/index.html'
     model = Adds
     context_object_name = 'adds'
-    paginate_by = 3
+    paginate_by = 6
     ordering = ['-date_of_publication']
 
     def get_queryset(self):
@@ -78,3 +80,31 @@ class AddsView(DetailView):
         context['comments'] = comments.order_by('-created_at')
         return context
 
+class ListNoModerAdds(PermissionRequiredMixin, ListView):
+    model = Adds
+    template_name = 'comments/not_moder.html'
+    context_object_name = 'adds'
+    permission_required = 'webapp.view_not_moderated_adds'
+
+
+    def has_permission(self):
+        return super().has_permission()
+
+    def get_queryset(self):
+        return super().get_queryset().filter(status='On_moderated')
+
+class CheckModer(View):
+    def get(self, request, *args, **kwargs):
+        add = get_object_or_404(Adds, pk=self.kwargs.get('pk'))
+        add.status = 'Published'
+        add.save()
+        response = JsonResponse({'status': add.status})
+        return response
+
+class CheckCancelModer(View):
+    def get(self, request, *args, **kwargs):
+        add = get_object_or_404(Adds, pk=self.kwargs.get('pk'))
+        add.status = 'Rejected'
+        add.save()
+        response = JsonResponse({'status': add.status})
+        return response
