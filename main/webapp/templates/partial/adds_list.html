@@ -1,0 +1,24 @@
+{% load static %}
+<div style="display: inline-block">
+<br/>
+<div class="card ms-5" style="width: 18rem;">
+        {% if add.image %}
+        <img src="{{ add.image.url }}" class="card-img-top" style="max-width: 300px; max-height: 180px">
+    {% else %}
+        <img src="{% static "images/No-Image-Placeholder.svg.png" %}" style="max-width: 300px; max-height: 180px">
+    {% endif %}
+  <div class="card-body">
+      {% if request.user == add.author %}
+                <a class="btn btn-primary" href="{% url "webapp:delete_adds" add.pk %}">Удалить ваше объявление!</a>
+          <br/>
+          <br/>
+    {% endif %}
+    <h5 class="card-title">Товар: {{ add.title }}</h5>
+    <p class="card-text">Категория: {{ add.category }} </p>
+      <p class="card-text">Цена: {{ add.price }} $</p>
+    <a href="{% url "webapp:detail_adds" add.pk %}" class="btn btn-primary">Просмотр товара</a>
+  </div>
+</div>
+<br/>
+</div>
+

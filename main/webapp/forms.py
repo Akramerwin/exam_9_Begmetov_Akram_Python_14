@@ -8,7 +8,7 @@ from django.utils.deconstruct import deconstructible
 class AddsForm(forms.ModelForm):
     class Meta:
         model = Adds
-        fields = ['title', 'description_adds', 'category', 'price']
+        fields = ['image', 'title', 'description_adds', 'category', 'price']
 
 
 # class ReviewForm(forms.ModelForm):

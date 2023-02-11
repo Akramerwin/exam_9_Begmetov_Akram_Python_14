@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block nav %}
+{#    {% if perms.webapp.change_product %}#}
+{% if request.user == adds.author %}
+                <a class="nav-link" href="{% url "webapp:update_adds" adds.pk %}">Update!</a>
+    {% endif %}
+{#    {% if perms.webapp.delete_product %}#}
+{% if request.user == adds.author %}
+                <a class="nav-link" href="{% url "webapp:delete_adds" adds.pk %}">Delete!</a>
+{% endif %}
+
+{#    {% endif %}#}
+
+{% endblock %}
+{% block content %}
+<br/>
+<div class="card border-success mb-3" style="max-width: 18rem;">
+  <div class="card-header bg-transparent border-success">Task</div>
+  <div class="card-body text-success">
+            {% if adds.image %}
+            <img src="{{ adds.image.url }}" class="img-fluid rounded-start">
+            </div>
+            {% else %}
+        <img src="{% static "images/No-Image-Placeholder.svg.png" %}" class="img-fluid rounded-start">
+            {% endif %}
+    <h5 class="card-title">Товар: {{ adds.title }}</h5>
+    <p class="card-text">Описания Товара: {{ adds.description_adds }}</p>
+    <p class="card-text">Автор: {{ adds.author }}</p>
+    <p class="card-text">Категория: {{ adds.category }}</p>
+    <p class="card-text">Цена: {{ adds.price }}</p>
+    <p class="card-text">Дата создания: {{ adds.created_at }}</p>
+ </div>
+  <div class="card-footer bg-transparent border-success"><p><a href="{% url 'webapp:index' %}" style="color: green; text-decoration: none">На главную</a></p>
+</div>
+</div>
+{% endblock %}

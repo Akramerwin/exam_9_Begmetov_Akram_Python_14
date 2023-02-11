@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    <h1>Are you sure want to delete Adds "{{ adds.title }}"?</h1>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <p><input type="submit" value="Confirm" style="color: red"></p>
+        <p><button type="button" class="btn btn-info">
+        <a style="text-decoration: none; color: black" href="{% url "webapp:detail_adds" adds.pk %}">Cancel</a></button></p>
+    </form>
+{% endblock %}
