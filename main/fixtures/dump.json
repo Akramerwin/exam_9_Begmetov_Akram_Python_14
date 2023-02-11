@@ -1,0 +1,219 @@
+[
+{
+  "model": "webapp.adds",
+  "pk": 1,
+  "fields": {
+    "image": "uploads/user_adds_image/Без_названия_SZSIQNb.jpeg",
+    "title": "Acer aspire22",
+    "description_adds": "i7",
+    "author": 1,
+    "category": 11,
+    "price": 500,
+    "status": "Published",
+    "created_at": "2023-02-11T07:30:41.822Z",
+    "date_of_publication": null,
+    "edited_at": "2023-02-11T12:19:07.426Z"
+  }
+},
+{
+  "model": "webapp.adds",
+  "pk": 2,
+  "fields": {
+    "image": "uploads/user_adds_image/Без_названия_hwy2PhD.jpeg",
+    "title": "Швабра2",
+    "description_adds": "Хорошая швабра",
+    "author": 1,
+    "category": 11,
+    "price": 20,
+    "status": "Published",
+    "created_at": "2023-02-11T08:02:24.680Z",
+    "date_of_publication": null,
+    "edited_at": "2023-02-11T12:14:36.908Z"
+  }
+},
+{
+  "model": "webapp.adds",
+  "pk": 10,
+  "fields": {
+    "image": "uploads/user_adds_image/308_big.webp",
+    "title": "Компьютер",
+    "description_adds": "i5 9\r\n3060",
+    "author": 4,
+    "category": 11,
+    "price": 500,
+    "status": "Published",
+    "created_at": "2023-02-11T12:29:39.749Z",
+    "date_of_publication": null,
+    "edited_at": "2023-02-11T12:29:56.891Z"
+  }
+},
+{
+  "model": "webapp.adds",
+  "pk": 11,
+  "fields": {
+    "image": "uploads/user_adds_image/1-500x500.jpeg",
+    "title": "Роутер 5g 220hz",
+    "description_adds": "Хороший",
+    "author": 3,
+    "category": 11,
+    "price": 200,
+    "status": "Published",
+    "created_at": "2023-02-11T12:32:53.518Z",
+    "date_of_publication": null,
+    "edited_at": "2023-02-11T12:33:24.242Z"
+  }
+},
+{
+  "model": "webapp.adds",
+  "pk": 12,
+  "fields": {
+    "image": "uploads/user_adds_image/24234.jpeg",
+    "title": "Xiaomi",
+    "description_adds": "Пылесос",
+    "author": 3,
+    "category": 11,
+    "price": 300,
+    "status": "Published",
+    "created_at": "2023-02-11T12:34:05.439Z",
+    "date_of_publication": null,
+    "edited_at": "2023-02-11T12:34:07.534Z"
+  }
+},
+{
+  "model": "webapp.adds",
+  "pk": 13,
+  "fields": {
+    "image": "uploads/user_adds_image/images.jpeg",
+    "title": "Chevrolet",
+    "description_adds": "Chevrolet Kallos",
+    "author": 3,
+    "category": 14,
+    "price": 4000,
+    "status": "Published",
+    "created_at": "2023-02-11T12:36:26.048Z",
+    "date_of_publication": null,
+    "edited_at": "2023-02-11T12:36:55.910Z"
+  }
+},
+{
+  "model": "webapp.adds",
+  "pk": 14,
+  "fields": {
+    "image": "uploads/user_adds_image/grabli.jpeg",
+    "title": "Грабли",
+    "description_adds": "Для Сада",
+    "author": 4,
+    "category": 13,
+    "price": 20,
+    "status": "Published",
+    "created_at": "2023-02-11T12:38:47.445Z",
+    "date_of_publication": null,
+    "edited_at": "2023-02-11T12:39:20.085Z"
+  }
+},
+{
+  "model": "webapp.category",
+  "pk": 10,
+  "fields": {
+    "name_category": "Для дома"
+  }
+},
+{
+  "model": "webapp.category",
+  "pk": 11,
+  "fields": {
+    "name_category": "Электроника"
+  }
+},
+{
+  "model": "webapp.category",
+  "pk": 12,
+  "fields": {
+    "name_category": "Разное"
+  }
+},
+{
+  "model": "webapp.category",
+  "pk": 13,
+  "fields": {
+    "name_category": "Игрушки"
+  }
+},
+{
+  "model": "webapp.category",
+  "pk": 14,
+  "fields": {
+    "name_category": "Автомобили"
+  }
+},
+{
+  "model": "webapp.comments",
+  "pk": 10,
+  "fields": {
+    "description_comment": "Хороший ноутбук",
+    "author": 3,
+    "adds": 1,
+    "created_at": "2023-02-11T12:31:26.281Z"
+  }
+},
+{
+  "model": "webapp.comments",
+  "pk": 11,
+  "fields": {
+    "description_comment": "Сломалась через неделю",
+    "author": 3,
+    "adds": 2,
+    "created_at": "2023-02-11T12:31:42.417Z"
+  }
+},
+{
+  "model": "webapp.comments",
+  "pk": 12,
+  "fields": {
+    "description_comment": "Какой пробег?",
+    "author": 4,
+    "adds": 13,
+    "created_at": "2023-02-11T12:37:47.921Z"
+  }
+},
+{
+  "model": "webapp.comments",
+  "pk": 13,
+  "fields": {
+    "description_comment": "Плохой",
+    "author": 4,
+    "adds": 12,
+    "created_at": "2023-02-11T12:38:06.606Z"
+  }
+},
+{
+  "model": "webapp.comments",
+  "pk": 14,
+  "fields": {
+    "description_comment": "5g Не держит",
+    "author": 4,
+    "adds": 11,
+    "created_at": "2023-02-11T12:38:19.153Z"
+  }
+},
+{
+  "model": "accounts.profile",
+  "pk": 1,
+  "fields": {
+    "user": 3,
+    "birth_date": null,
+    "phone_number": "23123",
+    "avatar": ""
+  }
+},
+{
+  "model": "accounts.profile",
+  "pk": 2,
+  "fields": {
+    "user": 4,
+    "birth_date": null,
+    "phone_number": "",
+    "avatar": ""
+  }
+}
+]
